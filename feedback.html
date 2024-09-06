@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="1/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Feedback Form</h2>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Are you satisfied with our service?</label>
+                <div class="radio-group">
+                    <input type="radio" id="yes" name="satisfaction" value="yes" checked>
+                    <label for="yes">Yes</label>
+                    
+                    <input type="radio" id="no" name="satisfaction" value="no">
+                    <label for="no">No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comments">Feedback:</label>
+                <textarea id="comments" name="comments" rows="4" required></textarea>
+            </div>
+            <li>
+                <a class="button" href="feedback.html">Submit</a>
+             </li>
+            
+        </form>
+    </div>
+</body>
+</html>

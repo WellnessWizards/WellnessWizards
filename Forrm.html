@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Replace this section with the new CSS */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: rgb(71, 127, 149);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            z-index: 0;
+        }
+
+        .container {
+            background: rgb(75, 74, 74);
+            padding: 30px;
+            border: 2px solid cyan;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: cyan;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        label {
+            display: inline-block;
+            margin: 15px 10px 10px 0;
+            font-size: 1.2em;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        .button {
+            background: cyan;
+            color: rgb(255, 255, 255);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background: #00ffff;
+            transform: scale(1.1);
+        }
+
+        .result {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="container">
+        <h1>Mental Health Assessment</h1>
+        <form id="mentalHealthForm">
+            <div class="question active" id="question1">
+                <label for="q1">1. How often do you feel stressed?</label>
+                <div class="options">
+                    <input type="radio" id="q1a" name="q1" value="3">
+                    <label for="q1a">Never</label>
+                    <input type="radio" id="q1b" name="q1" value="2">
+                    <label for="q1b">Sometimes</label>
+                    <input type="radio" id="q1c" name="q1" value="1">
+                    <label for="q1c">Often</label>
+                    <input type="radio" id="q1d" name="q1" value="0">
+                    <label for="q1d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(1)">Next</button>
+            </div>
+            <div class="question" id="question2">
+                <label for="q2">2. How often do you feel anxious?</label>
+                <div class="options">
+                    <input type="radio" id="q2a" name="q2" value="3">
+                    <label for="q2a">Never</label>
+                    <input type="radio" id="q2b" name="q2" value="2">
+                    <label for="q2b">Sometimes</label>
+                    <input type="radio" id="q2c" name="q2" value="1">
+                    <label for="q2c">Often</label>
+                    <input type="radio" id="q2d" name="q2" value="0">
+                    <label for="q2d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(2)">Next</button>
+            </div>
+            <div class="question" id="question3">
+                <label for="q3">3. How often do you feel down, depressed, or hopeless?</label>
+                <div class="options">
+                    <input type="radio" id="q3a" name="q3" value="3">
+                    <label for="q3a">Never</label>
+                    <input type="radio" id="q3b" name="q3" value="2">
+                    <label for="q3b">Sometimes</label>
+                    <input type="radio" id="q3c" name="q3" value="1">
+                    <label for="q3c">Often</label>
+                    <input type="radio" id="q3d" name="q3" value="0">
+                    <label for="q3d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(3)">Next</button>
+            </div>
+            <div class="question" id="question4">
+                <label for="q4">4. How often do you have trouble sleeping?</label>
+                <div class="options">
+                    <input type="radio" id="q4a" name="q4" value="3">
+                    <label for="q4a">Never</label>
+                    <input type="radio" id="q4b" name="q4" value="2">
+                    <label for="q4b">Sometimes</label>
+                    <input type="radio" id="q4c" name="q4" value="1">
+                    <label for="q4c">Often</label>
+                    <input type="radio" id="q4d" name="q4" value="0">
+                    <label for="q4d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(4)">Next</button>
+            </div>
+            <div class="question" id="question5">
+                <label for="q5">5. How often do you feel tired or have little energy?</label>
+                <div class="options">
+                    <input type="radio" id="q5a" name="q5" value="3">
+                    <label for="q5a">Never</label>
+                    <input type="radio" id="q5b" name="q5" value="2">
+                    <label for="q5b">Sometimes</label>
+                    <input type="radio" id="q5c" name="q5" value="1">
+                    <label for="q5c">Often</label>
+                    <input type="radio" id="q5d" name="q5" value="0">
+                    <label for="q5d">Always</label>
+                    
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(5)">Next</button>
+            </div>
+            <div class="question" id="question6">
+                <label for="q6">6. Little interest or pleasure in doing things?</label>
+                <div class="options">
+                    <input type="radio" id="q6a" name="q6" value="3">
+                    <label for="q6a">Never</label>
+                    <input type="radio" id="q6b" name="q6" value="2">
+                    <label for="q6b">Sometimes</label>
+                    <input type="radio" id="q6c" name="q6" value="1">
+                    <label for="q6c">Often</label>
+                    <input type="radio" id="q6d" name="q6" value="0">
+                    <label for="q6d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(6)">Next</button>
+            </div>
+            <div class="question" id="question7">
+                <label for="q7">7. Trouble falling or staying asleep, or sleeping too much?</label>
+                <div class="options">
+                    <input type="radio" id="q7a" name="q7" value="3">
+                    <label for="q7a">Never</label>
+                    <input type="radio" id="q7b" name="q7" value="2">
+                    <label for="q7b">Sometimes</label>
+                    <input type="radio" id="q7c" name="q7" value="1">
+                    <label for="q7c">Often</label>
+                    <input type="radio" id="q7d" name="q7" value="0">
+                    <label for="q7d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(7)">Next</button>
+            </div>
+            <div class="question" id="question8">
+                <label for="q8">8. Poor appetite or overeating?</label>
+                <div class="options">
+                    <input type="radio" id="q8a" name="q8" value="3">
+                    <label for="q8a">Never</label>
+                    <input type="radio" id="q8b" name="q8" value="2">
+                    <label for="q8b">Sometimes</label>
+                    <input type="radio" id="q8c" name="q8" value="1">
+                    <label for="q8c">Often</label>
+                    <input type="radio" id="q8d" name="q8" value="0">
+                    <label for="q8d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(8)">Next</button>
+            </div>
+            <div class="question" id="question9">
+                <label for="q9">9. Feeling bad about yourself - or that you are a failure or have let yourself or your family down?</label>
+                <div class="options">
+                    <input type="radio" id="q9a" name="q9" value="3">
+                    <label for="q9a">Never</label>
+                    <input type="radio" id="q9b" name="q9" value="2">
+                    <label for="q9b">Sometimes</label>
+                    <input type="radio" id="q9c" name="q9" value="1">
+                    <label for="q9c">Often</label>
+                    <input type="radio" id="q9d" name="q9" value="0">
+                    <label for="q9d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(9)">Next</button>
+            </div>
+            <div class="question" id="question10">
+                <label for="q10">10. Trouble concentrating on things, such as reading the newspaper or watching television?</label>
+                <div class="options">
+                    <input type="radio" id="q10a" name="q10" value="3">
+                    <label for="q10a">Never</label>
+                    <input type="radio" id="q10b" name="q10" value="2">
+                    <label for="q10b">Sometimes</label>
+                    <input type="radio" id="q10c" name="q10" value="1">
+                    <label for="q10c">Often</label>
+                    <input type="radio" id="q10d" name="q10" value="0">
+                    <label for="q10d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(10)">Next</button>
+            </div>
+            <div class="question" id="question11">
+                <label for="q11">11. How often do you have trouble sleeping?</label>
+                <div class="options">
+                    <input type="radio" id="q11a" name="q11" value="3">
+                    <label for="q11a">Never</label>
+                    <input type="radio" id="q11b" name="q11" value="2">
+                    <label for="q11b">Sometimes</label>
+                    <input type="radio" id="q11c" name="q11" value="1">
+                    <label for="q11c">Often</label>
+                    <input type="radio" id="q11d" name="q11" value="0">
+                    <label for="q11d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(11)">Next</button>
+            </div>
+            <div class="question" id="question12">
+                <label for="q12">12. Moving or speaking so slowly that other people could have noticed
+                    Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual
+      ?</label>
+                <div class="options">
+                    <input type="radio" id="q12a" name="q12" value="3">
+                    <label for="q12a">Never</label>
+                    <input type="radio" id="q12b" name="q12" value="2">
+                    <label for="q12b">Sometimes</label>
+                    <input type="radio" id="q12c" name="q12" value="1">
+                    <label for="q12c">Often</label>
+                    <input type="radio" id="q12d" name="q12" value="0">
+                    <label for="q12d">Always</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(12)">Next</button>
+            </div>
+            <div class="question" id="question13">
+                <label for="q13">13. If you checked off any problems, how difficult have these problems made it for you at work, home, or with other people??</label>
+                <div class="options">
+                    <input type="radio" id="q13a" name="q13" value="3">
+                    <label for="q13a">Never</label>
+                    <input type="radio" id="q13b" name="q13" value="2">
+                    <label for="q13b">Sometimes</label>
+                    <input type="radio" id="q13c" name="q13" value="1">
+                    <label for="q13c">Often</label>
+                    <input type="radio" id="q13d" name="q13" value="0">
+                    <label for="q13d">Always</label>
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(13)">Next</button>
+                    </div>
+                    <div class="question" id="question14">
+   
+                        <label for="q14">14. You felt so good or hyper that other people thought you were not your normal self or were so hyper that you got into trouble?</label>
+                                        
+                        <div class="options">
+                                            
+                        <input type="radio" id="q14a" name="q14" value="2">
+                              
+                        <label for="q14a">no</label>
+                        
+                                            
+                        <input type="radio" id="q14d" name="q14" value="0">
+                                            
+                        <label for="q14d">yes</label>
+                                            
+                        </div>
+                        <button type="button" class="button" onclick="nextQuestion(14)">Next</button>
+                    </div>
+
+                        <div class="question" id="question15">
+                           
+                        <label for="q15">15. 	You were so irritable that you shouted at people or started fights or arguments?</label>
+                                        
+                        <div class="options">
+                                            
+                        <input type="radio" id="q15a" name="q15" value="2">
+                              
+                        <label for="q15a">no</label>
+                        
+                                            
+                        <input type="radio" id="q15d" name="q15" value="0">
+                                            
+                        <label for="q15d">yes</label>
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(15)">Next</button>
+                </div>                  
+                        
+                        <div class="question" id="question16">
+                           
+                        <label for="q16">16. 	You were so easily distracted by things around you that you had trouble concentrating or staying on track?</label>
+                                        
+                        <div class="options">
+                                            
+                        <input type="radio" id="q16a" name="q16" value="2">
+                              
+                        <label for="q16a">no</label>
+                        
+                                            
+                        <input type="radio" id="q16d" name="q16" value="0">
+                                            
+                        <label for="q16d">yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(16)">Next</button>
+                </div>
+                        <div class="question" id="question17">
+                           
+                        <label for="q17">17. You did things that were unusual for you or that other people might have thought were excessive, foolish, or risky?</label>
+                                        
+                        <div class="options">
+                                            
+                        <input type="radio" id="q17a" name="q17" value="2">
+                              
+                        <label for="q17a">no</label>
+                        
+                                            
+                        <input type="radio" id="q17d" name="q17" value="0">
+                                            
+                        <label for="q17d">yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(17)">Next</button>
+                </div>
+                       
+                        <div class="question" id="question18">
+                           
+                        <label for="q18">18. Do familiar surroundings sometimes seem strange, confusing, threatening or unreal to you?</label>
+                                        
+                        <div class="options">
+                                            
+                        <input type="radio" id="q18a" name="q18" value="2">
+                              
+                        <label for="q19a">no</label>
+                        
+                                            
+                        <input type="radio" id="q18d" name="q18" value="0">
+                                            
+                        <label for="q18">yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(18)">Next</button>
+                </div>
+                        <div class="question" id="question19">
+                           
+                        <label for="q19">19. Do familiar surroundings sometimes seem strange, confusing, threatening or unreal to you?</label>
+                                        
+                        <div class="options">
+                                             
+                        <input type="radio" id="q19d" name="q19" value="3">
+                                            
+                        <label for="q19d"> no</label>
+                                            
+                        <input type="radio" id="q19d" name="q19" value="1">
+                                            
+                        <label for="q19d">  yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(19)">Next</button>
+                </div>
+                        <div class="question" id="question20">
+                           
+                        <label for="q20">20 Have you felt that you are not in control of your own ideas or thoughts?</label>
+                                        
+                        <div class="options">
+                                             
+                        <input type="radio" id="q20d" name="q20" value="3">
+                                            
+                        <label for="q20d"> no</label>
+                                            
+                        <input type="radio" id="q20d" name="q20" value="1">
+                                            
+                        <label for="q20d">  yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(20)">Next</button>
+                </div>
+                        <div class="question" id="question21">
+                           
+                        <label for="q21">21 Have you heard unusual sounds like banging, clicking, hissing, clapping or ringing in your ears?</label>
+                                        
+                        <div class="options">
+                                             
+                        <input type="radio" id="q21d" name="q21" value="3">
+                                            
+                        <label for="q21d"> no</label>
+                                            
+                        <input type="radio" id="q21d" name="q21" value="1">
+                                            
+                        <label for="q21d">  yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(21)">Next</button>
+                </div>
+                        <div class="question" id="question22">
+                           
+                        <label for="q22">22 Do things that you see appear different from the way they usually do?</label>
+                                        
+                        <div class="options">
+                                             
+                        <input type="radio" id="q22d" name="q22" value="3">
+                                            
+                        <label for="q22d"> no</label>
+                                            
+                        <input type="radio" id="q22d" name="q22" value="1">
+                                            
+                        <label for="q22d">  yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(22)">Next</button>
+                </div>
+                        <div class="question" id="question23">
+                           
+                        <label for="q23">23 Spending money got you or your family into trouble?</label>
+                                        
+                        <div class="options">
+                                             
+                        <input type="radio" id="q23d" name="q23" value="3">
+                                            
+                        <label for="q23d"> no</label>
+                                            
+                        <input type="radio" id="q23d" name="q23" value="1">
+                                            
+                        <label for="q23d">  yes</label>
+                                            
+                    </div>
+                    <button type="button" class="button" onclick="nextQuestion(23)">Next</button>
+                </div>
+                        <div class="question" id="question24">
+                           
+                        <label for="q24">24. Do you ever feel fat?</label>
+                                        
+                        <div class="options">
+                                            
+                        <input type="radio" id="q24a" name="q24" value="4">
+                              
+                        <label for="q24a"> Never</label>
+                        
+                         
+                        <input type="radio" id="q24d" name="q25" value="3">
+                                            
+                        <label for="q24d"> Sometimes</label>
+                         
+                        <input type="radio" id="q24d" name="q24" value="2">
+                                            
+                        <label for="q24d">  often</label>
+                                            
+                        <input type="radio" id="q24d" name="q24" value="1">
+                                            
+                        <label for="q24d">  always</label>
+                                            
+                    </div>
+                    
+                        
+                    <div>
+                        <br>
+                    <button type="button" class="button" onclick="showResult()">Submit</button>
+                </div>
+                
+                
+        
+                
+            </div>
+        </form>  
+        <div id="result" style="display: none;">
+            <p id="score"></p>
+            <p id="recommendation"></p>
+            <a class="button" href="index.html">Home Page</a>
+        </div>
+        
+    </div>
+
+    <script>
+        function nextQuestion(current) {
+            document.getElementById('question' + current).classList.remove('active');
+            document.getElementById('question' + (current + 1)).classList.add('active');
+        }
+
+        function showResult() {
+            console.log('Calculating score...');
+            let score = 0;
+            const questions = 24; // Total number of questions with radio buttons
+            for (let i = 1; i <= questions; i++) {
+                const answer = document.querySelector('input[name="q' + i + '"]:checked');
+                if (answer) {
+                    score += parseInt(answer.value);
+                }
+            }
+
+            console.log('Score calculated:', score);
+
+            const formElement = document.getElementById('mentalHealthForm');
+            const resultElement = document.getElementById('result');
+            const scoreElement = document.getElementById('score');
+            const recommendationElement = document.getElementById('recommendation');
+
+            if (formElement && resultElement && scoreElement && recommendationElement) {
+                formElement.style.display = 'none';
+                resultElement.style.display = 'block';
+                scoreElement.innerText = 'Your mental health score is: ' + score;
+
+                if (score <= 35) {
+                    recommendationElement.innerText = 'Your mental health score indicates that you may be experiencing significant stress or anxiety. It is recommended to see a mental health professional for further evaluation.';
+                } else if (score <= 60) {
+                    recommendationElement.innerText = 'You might be experiencing some stress or anxiety. Consider talking to a friend or practicing relaxation techniques.';
+                } else {
+                    recommendationElement.innerText = 'Your mental health seems to be in good condition. Keep up the good work!';
+                }
+            } else {
+                console.error('One or more elements are missing in the DOM.');
+            }
+        }
+       
+    </script>
+
+    
+</body>
+</html>
